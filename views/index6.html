@@ -5,6 +5,17 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="css/client.css" />
+    	
+	<!--Scoket.io-->
+    <!--Scoket.io-->
+	<script src="js/socket.io.js"></script>
+
+	<!--Client Side CSS-->
+	<link rel="stylesheet" href="css/client.css" />
+	<script src="js/socket.io.js"></script>
+    <script src="/src/index.js"></script>
+    <script src="/js/client.js"></script>
+
 	<!--<style>-->
 		<style type="text/css" media="screen">
 			@font-face {
@@ -198,9 +209,8 @@
 
 	<!--<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />-->
 	
-	
-	<!--Scoket.io-->
-	<script src="js/socket.io.js"></script>
+
+
 
 	<!--Client Side CSS-->
 	<link rel="stylesheet" href="css/client.css" />
@@ -220,21 +230,71 @@
     <h3>.</h3>
    
    
-<input type="text" id="test0" placeholder="이름" style="font-size:55px; width:350px; text-align: center" >
+<input type="text" id="test0" onkeyup='print1()' placeholder="이름" style="font-size:55px; width:350px; text-align: center" >
  
 
 <h1>학번</h>
     <h3>.</h3>
-<input type="text" id="test1" placeholder="학번" style="font-size:55px; width:350px;text-align: center">
-
+<input type="text" id="test1" onkeyup='print2()' placeholder="학번" style="font-size:55px; width:350px;text-align: center">
+<div id='result1'></div>
+<div id='result2'></div>
+<div id='result3'></div>
 <h1>전화번호</h>
     <h3>.</h3>
-<input type="text" id="test2" placeholder="전화번호"style="font-size:55px; width:350px;text-align: center">
+<input type="text" id="test2" onkeyup='print3()' placeholder="전화번호"style="font-size:55px; width:350px;text-align: center">
 <br>
-<!--- <button  class="button" onclick="send2()" >NEXT</button>-->
-<button class="button" type="button" onclick="location.href='index1.html'">
-NEXT
-</button>
+<button type="button" class="button" onclick='sends()'>NEXT</button>
+<!--<input id='name' onchange='printName()'onclick='sends()'/>-->
+
+<script type="text/javascript">
+var stringsinfo;
+var name1;
+var name2;
+var name3;
+
+function print1()  {
+  name1 = document.getElementById('test0').value;
+  document.getElementById("result1").innerText = name1;
+  stringsinfo+=name1;
+}
+
+function print2()  {
+  name2 = document.getElementById('test1').value;
+  document.getElementById("result2").innerText = name2;
+  stringsinfo+=name2;
+}
+
+function print3()  {
+  name3 = document.getElementById('test2').value;
+  document.getElementById("result3").innerText = name3;
+  stringsinfo+=name3;
+}
+    function printName()  {
+ 
+
+  document.getElementById("result").innerText = stringsinfo;
+
+}
+    
+    function sends(){
+
+
+       //fs.writeFile('list.txt',stringsinfo ,{ flag: 'a+' }, err => {
+     // if (err) {
+      //  console.error(err)
+      //  return
+     // }
+      //file written successfully
+  // })
+
+   location.href='index1.html'
+
+    }
+
+   
+</script>
+
+<!--<button class="button" type="button" onclick="location.href='index1.html'">-->
 
 
 </body>

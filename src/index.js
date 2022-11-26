@@ -2,7 +2,8 @@ import Scene from './scene';
 import * as THREE from 'three';
 
 //A socket.io instance
-const socket = io();
+//const socket = io();
+var socket=io();
 
 //One WebGL context to rule them all !
 let glScene = new Scene();
@@ -16,6 +17,9 @@ glScene.on('userMoved', ()=>{
 
 //On connection server sends the client his ID
 socket.on('introduction', (_id, _clientNum, _ids)=>{
+  var realname;
+  var number;
+  var name;
 
   for(let i = 0; i < _ids.length; i++){
     if(_ids[i] != _id){
@@ -31,7 +35,7 @@ socket.on('introduction', (_id, _clientNum, _ids)=>{
     }
   }
 
-  console.log(clients);
+  console.log("hhhhh");
 
   id = _id;
   console.log('My ID is: ' + id);
@@ -73,7 +77,14 @@ socket.on('userDisconnected', (clientCount, _id, _ids)=>{
   }
 });
 
-socket.on('connect', ()=>{});
+/* 서버로부터 데이터 받은 경우 */
+
+
+socket.on('connect', ()=>{
+
+console.log("user client connect~")
+
+});
 
 //Update when one of the users moves in space
 socket.on('userPositions', _clientProps =>{
@@ -97,3 +108,4 @@ socket.on('userPositions', _clientProps =>{
     }
   }
 });
+

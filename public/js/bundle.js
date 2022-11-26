@@ -46550,6 +46550,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 //A socket.io instance
+//const socket = io();
 var socket = io();
 
 //One WebGL context to rule them all !
@@ -46564,6 +46565,9 @@ glScene.on('userMoved', function () {
 
 //On connection server sends the client his ID
 socket.on('introduction', function (_id, _clientNum, _ids) {
+  var realname;
+  var number;
+  var name;
 
   for (var i = 0; i < _ids.length; i++) {
     if (_ids[i] != _id) {
@@ -46575,7 +46579,7 @@ socket.on('introduction', function (_id, _clientNum, _ids) {
     }
   }
 
-  console.log(clients);
+  console.log("hhhhh");
 
   id = _id;
   console.log('My ID is: ' + id);
@@ -46611,7 +46615,12 @@ socket.on('userDisconnected', function (clientCount, _id, _ids) {
   }
 });
 
-socket.on('connect', function () {});
+/* 서버로부터 데이터 받은 경우 */
+
+socket.on('connect', function () {
+
+  console.log("user client connect~");
+});
 
 //Update when one of the users moves in space
 socket.on('userPositions', function (_clientProps) {

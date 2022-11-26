@@ -33,50 +33,6 @@ app.set('view-engine', 'html');
 app.use(express.static(__dirname + '/public'));
 app.use(express.static(__dirname + '/views'));
 
-let clients = {}
-
-//Socket setup
-io.on('connection', client=>{
-
-  console.log('User ' + client.id + ' connected, there are ' + io.engine.clientsCount + ' clients connected');
-
-  //Add a new client indexed by his id
-  clients[client.id] = {
-    position: [0, 0, 0],
-    rotation: [0, 0, 0]
-  }
-
-  //Make sure to send the client it's ID
-  client.emit('introduction', client.id, io.engine.clientsCount, Object.keys(clients));
-
-  //Update everyone that the number of users has changed
-  io.sockets.emit('newUserConnected', io.engine.clientsCount, client.id, Object.keys(clients));
-
-  client.on('move', (pos)=>{
-
-    clients[client.id].position = pos;
-    io.sockets.emit('userPositions', clients);
-
-  });
-
-  //Handle the disconnection
-  client.on('disconnect', ()=>{
-
-    //Delete this client from the object
-    delete clients[client.id];
-
-    io.sockets.emit('userDisconnected', io.engine.clientsCount, client.id, Object.keys(clients));
-
-    console.log('User ' + client.id + ' dissconeted, there are ' + io.engine.clientsCount + ' clients connected');
-
-  });
-
-});
-
-/////////////////////
-//////ROUTER/////////
-/////////////////////
-
 //Client view
 app.get('/', (req, res) => {
  
@@ -111,24 +67,53 @@ app.get('index6', (req, res) => {
 
 });
 
-//app.get('/index', (req, res) => {
- // res.render('index5.html');
-	//res.render('index5.html');
+let clients = {}
 
-////});
+//Socket setup
+io.on('connection', client=>{
+
+  console.log('User ' + client.id + ' connected, there are ' + io.engine.clientsCount + ' clients connected');
+  console.log('User ' + client.id + ' connected, new there are ' + io.engine.clientsCount + ' clients connected');
+
+  //Add a new client indexed by his id
+  clients[client.id] = {
+    position: [0, 0, 0],
+    rotation: [0, 0, 0]
+  }
 
 
-//app.get('/views/index', (req, res) => {
+  //클라이언트에게 보냄.
+  //Make sure to send the client it's ID
+  client.emit('introduction', client.id, io.engine.clientsCount, Object.keys(clients));
 
-  //	res.render('404.html');
-   // res.render('index5.html');
-   //res.render('./index.html');
-   //res.render('./views/index.html')
-  
-  //});
+  //Update everyone that the number of users has changed
+  io.sockets.emit('newUserConnected', io.engine.clientsCount, client.id, Object.keys(clients));
 
-//app.get('/views/index',function(request,response){
- //res.render('./views/index.html')
-    
-  
-  //})
+  client.on('move', (pos)=>{
+
+    clients[client.id].position = pos;
+    io.sockets.emit('userPositions', clients);
+    console.log("move",pos)
+
+  });
+
+  //Handle the disconnection
+  client.on('disconnect', ()=>{
+
+    //Delete this client from the object
+    delete clients[client.id];
+
+    io.sockets.emit('userDisconnected', io.engine.clientsCount, client.id, Object.keys(clients));
+    console.log("disconnect")
+
+    console.log('User ' + client.id + ' dissconeted, there are ' + io.engine.clientsCount + ' clients connected');
+
+  });
+
+
+
+
+});
+
+
+
