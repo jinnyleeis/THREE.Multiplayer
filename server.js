@@ -67,6 +67,13 @@ app.get('index6', (req, res) => {
 
 });
 
+app.get('index8', (req, res) => {
+ 
+  res.render('index8.html');
+	//res.render('index.html');
+
+});
+
 let clients = {}
 
 //Socket setup
