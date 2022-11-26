@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<style>
+
+.button {
+    position: absolute;
+    display: block;
+    z-index: 99;
+    left: 50%;
+    top: 50%;
+    }
+	</style>
+<head>
+
+	<title>
+		Three.js Multiplayer Client
+	</title>
+
+	<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+
+	<!--Scoket.io-->
+	<script src="js/socket.io.js"></script>
+
+	<!--Client Side CSS-->
+	<link rel="stylesheet" href="css/client.css" />
+
+</head>
+<body>
+
+<!-- WebGL context -->
+<div id="gl_context"></div>
+
+<!-- Client side JS bundle -->
+<script src="js/bundle.js"></script>
+
+<button class="button" type="button" onclick="location.href='/index.html'">
+	바보 </button>
+
+</body>
+</html>

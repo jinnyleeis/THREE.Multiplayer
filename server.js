@@ -78,14 +78,39 @@ io.on('connection', client=>{
 
 //Client view
 app.get('/', (req, res) => {
-
-	res.render('index.html');
+  res.render('index.html');
+	//res.render('index.html');
 
 });
 
 //404 view
 app.get('/*', (req, res) => {
 
-	res.render('404.html');
+	//res.render('404.html');
+  res.render('index2.html');
+ //res.render('./index.html');
+ //res.render('index.html')
 
 });
+
+//app.get('/index', (req, res) => {
+ // res.render('index5.html');
+	//res.render('index5.html');
+
+////});
+
+
+//app.get('/views/index', (req, res) => {
+
+  //	res.render('404.html');
+   // res.render('index5.html');
+   //res.render('./index.html');
+   //res.render('./views/index.html')
+  
+  //});
+
+//app.get('/views/index',function(request,response){
+ //res.render('./views/index.html')
+    
+  
+  //})

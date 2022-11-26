@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delta-Individualism</title>
+    <script src="../server.js"></script>
+    <script src="../src/index.js"></script>
+ 
+    
+	<!--Scoket.io-->
+	<script src="js/socket.io.js"></script>
+
+	<!--Client Side CSS-->
+	<link rel="stylesheet" href="css/client.css" />
+    <style type="text/css" media="screen">
+    @font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+    }
+
+        *{
+            overflow-y: auto !important;
+        }
+
+    
+        .des-img{
+            width: 50%;
+        }
+    
+        .main-img{
+            
+           
+            width: 20%;
+            height: 50%;
+            top: 10%;
+            left: 50%;
+        }
+
+        body{
+            position: relative;
+            
+            text-align: center;
+            align-items: center;
+
+            margin: 0 auto;
+            background-color: #FF5E5A;
+        }
+
+        .container{
+            position: relative;
+            width: 60%;
+            text-align: center;
+            align-items: center;
+            display: inline-block;
+        }
+
+        .intro-vid{
+            position: relative;
+            width: 80%;
+        }
+
+        .subtitle{
+            position: relative;
+            width: 90%;
+            height:50%;
+            text-align:center;
+            display: inline-block;
+        }
+
+        h1{
+            position: relative;
+            font-family: 'Pretendard-Regular';
+            
+        
+            color: white;
+            font-size: 1.6rem;
+            
+            text-decoration-style: wavy;
+            text-decoration-color: #F17A72;
+        }
+
+        h3{
+            position: relative;
+            font-family: 'Pretendard-Regular';
+            font-weight: 300;
+            line-height: 200%;
+            padding: 1rem;
+            color: #FF5E5A;
+        }
+
+        h4{
+           
+            font-family: 'Pretendard-Regular';
+            font-weight: 100;
+            line-height: 100%;
+            font-size:10px;
+            padding: 0.0001px;
+            color: #FF5E5A;
+        }
+        h5{
+           
+           font-family: 'Pretendard-Regular';
+           font-weight: 100;
+           line-height: 100%;
+           font-size:0.3px;
+           padding: 0.0001px;
+           color: #FF5E5A;
+       }
+
+        p{
+            position: relative;
+            font-family: 'Pretendard-Regular';
+            font-weight: 300;
+            line-height: 200%;
+            padding: 1rem;
+            color: white;
+            margin-bottom: 3rem;
+        }
+
+        span{
+            position: relative;
+            color: #F17A72;
+            font-weight: bold;
+        }
+
+        .skip-button{
+            position: relative;
+            color:white;
+            background-color: transparent;
+            font-size: 16px;
+            height: 60px;
+            width:50%;
+
+            margin:0 auto;
+            border-radius: 20px;
+            border: 2px solid white;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            margin-bottom: 5rem;
+        }
+        .skip-button:hover{
+            position: relative;
+            background-color: white;
+            color: #F17A72;
+        }
+
+        .second-gif{
+            position: relative;
+            display: block;
+            margin: 0 auto;
+            width: 40%;
+        }
+
+
+        .button {
+        background-color:white;
+        border: none;
+        color:#FF5E5A;
+        padding: 12px 45px;
+        text-align: center;
+       
+        display: inline-block;
+        font-size: 40px;
+        margin: 60px 2px;
+        cursor: pointer;
+        
+      }
+      .button:hover {
+    background-color:#FF5E5A;
+    color:#FF5E5A;
+    transition: 0.7s;}
+
+    .font{
+        font-size: 35px;
+        margin: 2px 20px 1px 20px;
+      }
+
+
+        </style>
+
+    <!-- favicon
+    <link rel="apple-touch-icon" sizes="57x57" href="../static/img/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="../static/img/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="../static/img/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="../static/img/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="../static/img/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="../static/img/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="../static/img/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="../static/img/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../static/img/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="../static/img/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../static/img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="../static/img/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../static/img/favicon/favicon-16x16.png">
+    <link rel="manifest" href="../static/img/favicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="../static/img/favicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff"> -->
+
+</head>
+<body>
+  
+    <!--줄 그어지는거 효과가 뭐지?? 어떻게 없애지??-->
+    <div class="container">
+
+       <h4>.</h4>
+        <img class="main-img  "src="../static/img/logos.png">
+        <h4><</h4>
+        <h4><</h4>
+        
+        
+        <h1>이름</h>
+            <h5>.</h5>
+       
+        <input type="text" id="test0" placeholder="" style="font-size:37px; width:82%;  text-align: center" >
+         
+        <h5>.</h5>
+        <h1>학번</h>
+            <h5>.</h5>
+        <input type="text" id="test1" placeholder="" style="font-size:37px; width:82%; text-align: center">
+        
+        <h5>.</h5>
+        <h1>전화번호</h>
+        <h5>.</h5>
+        <input type="text" id="test2" placeholder=""style="font-size:37px; width:82%; text-align: center">
+        <br>
+      <!---<button  class="button" onclick="send()" >NEXT</button>-->
+      <button class="button" type="button" onclick="location.href='views/index.html'">
+        NEXT -->
+    </button>
+  
+  
+       
+        
+        
+        
+    </div>
+
+        <h3><</h3>
+       
+         
+    </div>
+</body>
+</html>

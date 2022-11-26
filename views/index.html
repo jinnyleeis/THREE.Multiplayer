@@ -1,5 +1,130 @@
 <!DOCTYPE html>
 <html>
+	<!--<style>-->
+		<style type="text/css" media="screen">
+		  @font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+    }
+
+
+html{
+                overflow-y: auto !important;
+            }
+
+body{
+
+	           position:absolute;
+                text-align: center;
+                align-items: center;
+                /*margin: 0 auto;*/
+				
+                
+            }
+
+			*{
+            overflow-y: auto !important;
+        }
+
+    
+        .des-img{
+            width: 50%;
+        }
+    
+        .main-img{
+            
+           
+            width: 50%;
+            height: 50%;
+            top: 10%;
+            left: 50%;
+        }
+
+       
+
+        .container{
+            position: relative;
+            width: 60%;
+            text-align: center;
+            align-items: center;
+            display: inline-block;
+        }
+		h1{
+            position: relative;
+            font-family: 'Pretendard-Regular';
+            
+        
+            color: white;
+            font-size: 1.7rem;
+            
+            text-decoration-style: wavy;
+            text-decoration-color: #F17A72;
+        }
+
+        h3{
+            position: relative;
+            font-family: 'Pretendard-Regular';
+            font-weight: 300;
+            line-height: 200%;
+            padding: 1rem;
+            color: #FF5E5A;
+        }
+
+        p{
+            position: relative;
+            font-family: 'Pretendard-Regular';
+            font-weight: 300;
+            line-height: 200%;
+            padding: 1rem;
+            color: white;
+            margin-bottom: 3rem;
+        }
+
+        span{
+            position: relative;
+            color: #F17A72;
+            font-weight: bold;
+        }
+
+
+
+.button {
+   /* position: absolute-->*/
+
+   position: absolute;
+    display: block;
+    z-index: 99;
+    left: 50%;
+    top: 50%;
+
+	background-color:white;
+        border: none;
+        color:#FF5E5A;
+        
+        text-align: center;
+       
+        padding: 12px 45px;
+        font-size: 40px;
+       
+        cursor: pointer;
+    }
+
+      .button:hover {
+    background-color:#FF5E5A;
+    color:white;
+    transition: 0.7s;}
+
+	.subtitle{
+            position: relative;
+            width: 90%;
+            height:50%;
+            text-align:center;
+            display: inline-block;
+        }
+
+	</style>
 <head>
 
 	<title>
@@ -17,11 +142,29 @@
 </head>
 <body>
 
-<!-- WebGL context -->
-<div id="gl_context"></div>
+<!-- WebGL context 
+<div id="gl_context"></div>-->
 
 <!-- Client side JS bundle -->
 <script src="js/bundle.js"></script>
+
+<div class="container">
+
+
+	<h3><</h3>
+	<h3><</h3>
+	<h3><</h3>
+	<h3><</h3>
+	<img class="main-img  "src="../static/img/logos.png">
+	<h1>HOMECOMING</h1>
+	
+	
+</div>
+<div class="subtitle">
+	<h3><</h3>
+
+<button class="button" type="button" onclick="location.href='/index2.html'">
+	NEXT </button>
 
 </body>
 </html>
