@@ -31,6 +31,7 @@ app.set('view-engine', 'html');
 
 //Setup the public client folder
 app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/views'));
 
 let clients = {}
 
@@ -78,6 +79,7 @@ io.on('connection', client=>{
 
 //Client view
 app.get('/', (req, res) => {
+ 
   res.render('index.html');
 	//res.render('index.html');
 
@@ -87,9 +89,25 @@ app.get('/', (req, res) => {
 app.get('/*', (req, res) => {
 
 	//res.render('404.html');
+//  res.render('index2.html');
+ //res.render('./index.html');
+ res.render('index.html')
+
+});
+
+app.get('/index', (req, res) => {
+ 
+	//res.render('404.html');
   res.render('index2.html');
  //res.render('./index.html');
  //res.render('index.html')
+
+});
+
+app.get('index6', (req, res) => {
+ 
+  res.render('index6.html');
+	//res.render('index.html');
 
 });
 
