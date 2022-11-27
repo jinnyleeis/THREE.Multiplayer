@@ -46235,6 +46235,11 @@ module.exports = EventEmitter;
 })));
 
 },{}],3:[function(require,module,exports){
+"use strict";
+
+console.error("Error: Cannot find module './scene' from '/Users/jiinlee/Desktop/THREE.Multiplayer/public/js'");
+
+},{}],4:[function(require,module,exports){
 'use strict';
 
 /**
@@ -46355,7 +46360,7 @@ module.exports = function (THREE) {
 												}
 									}
 
-									this.mouseDragOn = false;
+									this.mouseDragOn = true;
 						};
 
 						this.onMouseMove = function (event) {
@@ -46379,11 +46384,11 @@ module.exports = function (THREE) {
 
 												case 38: /*up*/
 												case 87:
-															/*W*/this.moveForward = true;break;
+															/*W*/this.moveForward = false;break;
 
 												case 37: /*left*/
 												case 65:
-															/*A*/this.moveLeft = true;break;
+															/*A*/this.moveLeft = false;break;
 
 												case 40: /*down*/
 												case 83:
@@ -46391,12 +46396,12 @@ module.exports = function (THREE) {
 
 												case 39: /*right*/
 												case 68:
-															/*D*/this.moveRight = true;break;
+															/*D*/this.moveRight = false;break;
 
 												case 82:
-															/*R*/this.moveUp = true;break;
+															/*R*/this.moveUp = false;break;
 												case 70:
-															/*F*/this.moveDown = true;break;
+															/*F*/this.moveDown = false;break;
 
 									}
 						};
@@ -46407,7 +46412,7 @@ module.exports = function (THREE) {
 
 												case 38: /*up*/
 												case 87:
-															/*W*/this.moveForward = false;break;
+															/*W*/this.moveForward = true;break;
 
 												case 37: /*left*/
 												case 65:
@@ -46537,7 +46542,7 @@ module.exports = function (THREE) {
 			};
 };
 
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 'use strict';
 
 var _scene = require('./scene');
@@ -46548,6 +46553,8 @@ var _three = require('three');
 
 var THREE = _interopRequireWildcard(_three);
 
+var _bundle = require('../public/js/bundle');
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -46556,13 +46563,39 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //const socket = io();
 var socket = io();
 
+var loader = new THREE.TextureLoader();
+
+var material1 = new THREE.MeshBasicMaterial({
+  map: loader.load("bgimage.png", undefined, undefined, function (err) {
+    alert('Error');
+  })
+});
+
+var material2 = new THREE.MeshBasicMaterial({
+  map: loader.load("pink.png", undefined, undefined, function (err) {
+    alert('Error');
+  })
+});
+
+var material3 = new THREE.MeshBasicMaterial({
+  map: loader.load("blue.png", undefined, undefined, function (err) {
+    alert('Error');
+  })
+});
+
+var arr = [material1, material2, material3];
+
 //One WebGL context to rule them all !
 var glScene = new _scene2.default();
 var id = void 0;
 var instances = [];
 var clients = new Object();
 
+//user move 보내 유저들한테. 다른 카메라 움직임을?? ㅇㅇ 유저움직임이랑 카메라랑 같을거니까.
+//아 아닌가. 카메라 위치인가.
+
 glScene.on('userMoved', function () {
+
   socket.emit('move', [glScene.camera.position.x, glScene.camera.position.y, glScene.camera.position.z]);
 });
 
@@ -46573,21 +46606,29 @@ socket.on('introduction', function (_id, _clientNum, _ids) {
   var number;
   var name;
 
+  // var geometry;
+
+
+  var w1 = Math.random();
+
   for (var i = 0; i < _ids.length; i++) {
     if (_ids[i] != _id) {
       clients[_ids[i]] = {
-        mesh: new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshNormalMaterial())
+        mesh: new THREE.Mesh(
+        //  new THREE.BoxGeometry(w1,w1,w1),
+        // new THREE.MeshNormalMaterial()
+        new THREE.BoxGeometry(w1, w1, w1), arr[Math.floor(Math.random() * arr.length)])
 
         //Add initial users to the scene
       };glScene.scene.add(clients[_ids[i]].mesh);
     }
   }
 
-  console.log("hhhhh");
-
   id = _id;
   console.log('My ID is: ' + id);
 });
+
+socket.emit("hh", "stranger");
 
 socket.on('newUserConnected', function (clientCount, _id, _ids) {
   console.log(clientCount + ' clients connected');
@@ -46598,10 +46639,12 @@ socket.on('newUserConnected', function (clientCount, _id, _ids) {
       break;
     }
   }
+
+  var w1 = Math.random() * 1.5;
   if (_id != id && !alreadyHasUser) {
     console.log('A new user connected with the id: ' + _id);
     clients[_id] = {
-      mesh: new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshNormalMaterial())
+      mesh: new THREE.Mesh(new THREE.BoxGeometry(w1, w1, w1), arr[Math.floor(Math.random() * arr.length)])
 
       //Add initial users to the scene
     };glScene.scene.add(clients[_id].mesh);
@@ -46610,6 +46653,7 @@ socket.on('newUserConnected', function (clientCount, _id, _ids) {
 
 socket.on('userDisconnected', function (clientCount, _id, _ids) {
   //Update the data from the server
+  //text받아와
   document.getElementById('numUsers').textContent = clientCount;
 
   if (_id != id) {
@@ -46649,7 +46693,7 @@ socket.on('userPositions', function (_clientProps) {
   }
 });
 
-},{"./scene":5,"three":2}],5:[function(require,module,exports){
+},{"../public/js/bundle":3,"./scene":6,"three":2}],6:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -46733,9 +46777,7 @@ var Scene = function (_EventEmitter) {
     }
 
     //Setup event listeners for events and handle the states
-    window.addEventListener('resize', function (e) {
-      return _this.onWindowResize(e);
-    }, false);
+    // window.addEventListener('resize', e => this.onWindowResize(e), false);
     domElement.addEventListener('mouseenter', function (e) {
       return _this.onEnterCanvas(e);
     }, false);
@@ -46813,4 +46855,4 @@ var Scene = function (_EventEmitter) {
 
 exports.default = Scene;
 
-},{"./fpscontrols":3,"event-emitter-es6":1,"three":2}]},{},[4]);
+},{"./fpscontrols":4,"event-emitter-es6":1,"three":2}]},{},[5]);

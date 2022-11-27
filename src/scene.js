@@ -1,6 +1,7 @@
 //Three.js
 import * as THREE from 'three';
 
+
 import FirstPersonControls from './fpscontrols';
 FirstPersonControls(THREE);
 
@@ -45,7 +46,7 @@ class Scene extends EventEmitter {
     }
 
     //Setup event listeners for events and handle the states
-    window.addEventListener('resize', e => this.onWindowResize(e), false);
+   // window.addEventListener('resize', e => this.onWindowResize(e), false);
     domElement.addEventListener('mouseenter', e => this.onEnterCanvas(e), false);
     domElement.addEventListener('mouseleave', e => this.onLeaveCanvas(e), false);
     window.addEventListener('keydown', e => this.onKeyDown(e), false);
@@ -56,6 +57,7 @@ class Scene extends EventEmitter {
     this.clock = new THREE.Clock();
 
     this.update();
+  
 
   }
 

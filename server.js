@@ -3,6 +3,8 @@
 //////EXPRESS////////
 const express = require('express');
 const app = express();
+const fs =require("fs");
+
 
 ////////HTTP/////////
 const http = require('http').createServer(app);
@@ -61,7 +63,6 @@ app.get('/index', (req, res) => {
 });
 
 app.get('index6', (req, res) => {
- 
   res.render('index6.html');
 	//res.render('index.html');
 
@@ -79,13 +80,22 @@ let clients = {}
 //Socket setup
 io.on('connection', client=>{
 
+
+  var a=Math.random()*20;
+  var b=Math.random()*20;
+  var c=Math.random()*20;
+
+
   console.log('User ' + client.id + ' connected, there are ' + io.engine.clientsCount + ' clients connected');
   console.log('User ' + client.id + ' connected, new there are ' + io.engine.clientsCount + ' clients connected');
 
   //Add a new client indexed by his id
   clients[client.id] = {
-    position: [0, 0, 0],
-    rotation: [0, 0, 0]
+  ///  position: [0, 0, 0],
+    //rotation: [0, 0, 0]
+      position: [a, -0.4, b],
+    rotation: [a, c, b]
+    
   }
 
 
@@ -98,9 +108,19 @@ io.on('connection', client=>{
 
   client.on('move', (pos)=>{
 
+   
+                        
+var list = document.getElementById("list");
+list.innerHTML = htmlStr;
+
+
+   
+
     clients[client.id].position = pos;
     io.sockets.emit('userPositions', clients);
-    console.log("move",pos)
+    console.log("move")
+
+
 
   });
 
