@@ -46285,7 +46285,8 @@ module.exports = function (THREE) {
 						this.moveLeft = false;
 						this.moveRight = false;
 
-						this.mouseDragOn = false;
+						//
+						this.mouseDragOn = true;
 
 						this.viewHalfX = 0;
 						this.viewHalfY = 0;
@@ -46503,6 +46504,7 @@ module.exports = function (THREE) {
 									this.domElement.removeEventListener('mousedown', _onMouseDown, false);
 									this.domElement.removeEventListener('mousemove', _onMouseMove, false);
 									this.domElement.removeEventListener('mouseup', _onMouseUp, false);
+									//this.domElement.removeEventListener( 'mouseup', _onMouseUp, false );
 
 									window.removeEventListener('keydown', _onKeyDown, false);
 									window.removeEventListener('keyup', _onKeyUp, false);
@@ -46512,6 +46514,7 @@ module.exports = function (THREE) {
 						var _onMouseDown = bind(this, this.onMouseDown);
 						var _onMouseUp = bind(this, this.onMouseUp);
 						var _onKeyDown = bind(this, this.onKeyDown);
+						var _onKeyUp = bind(this, this.onKeyUp);
 						var _onKeyUp = bind(this, this.onKeyUp);
 
 						this.domElement.addEventListener('contextmenu', contextmenu, false);
@@ -46563,6 +46566,7 @@ glScene.on('userMoved', function () {
   socket.emit('move', [glScene.camera.position.x, glScene.camera.position.y, glScene.camera.position.z]);
 });
 
+//아 이건 클라이언트가 받아오는거고. 누가 보냄.
 //On connection server sends the client his ID
 socket.on('introduction', function (_id, _clientNum, _ids) {
   var realname;

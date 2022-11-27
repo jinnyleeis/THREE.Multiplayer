@@ -13,8 +13,18 @@ let clients = new Object();
 
 glScene.on('userMoved', ()=>{
   socket.emit('move', [glScene.camera.position.x, glScene.camera.position.y, glScene.camera.position.z]);
-});
+}
 
+
+
+
+);
+
+
+
+
+
+//아 이건 클라이언트가 받아오는거고. 누가 보냄.
 //On connection server sends the client his ID
 socket.on('introduction', (_id, _clientNum, _ids)=>{
   var realname;

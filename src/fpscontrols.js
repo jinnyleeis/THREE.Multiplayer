@@ -46,7 +46,8 @@ module.exports = (THREE) =>{
 		this.moveLeft = false;
 		this.moveRight = false;
 
-		this.mouseDragOn = false;
+		//
+		this.mouseDragOn =true;
 
 		this.viewHalfX = 0;
 		this.viewHalfY = 0;
@@ -187,6 +188,13 @@ module.exports = (THREE) =>{
 
 		};
 
+
+		
+
+
+
+
+
 		this.update = function( delta ) {
 
 			if ( this.enabled === false ) return;
@@ -269,6 +277,7 @@ module.exports = (THREE) =>{
 			this.domElement.removeEventListener( 'mousedown', _onMouseDown, false );
 			this.domElement.removeEventListener( 'mousemove', _onMouseMove, false );
 			this.domElement.removeEventListener( 'mouseup', _onMouseUp, false );
+			//this.domElement.removeEventListener( 'mouseup', _onMouseUp, false );
 
 			window.removeEventListener( 'keydown', _onKeyDown, false );
 			window.removeEventListener( 'keyup', _onKeyUp, false );
@@ -279,6 +288,7 @@ module.exports = (THREE) =>{
 		var _onMouseDown = bind( this, this.onMouseDown );
 		var _onMouseUp = bind( this, this.onMouseUp );
 		var _onKeyDown = bind( this, this.onKeyDown );
+		var _onKeyUp = bind( this, this.onKeyUp );
 		var _onKeyUp = bind( this, this.onKeyUp );
 
 		this.domElement.addEventListener( 'contextmenu', contextmenu, false );
