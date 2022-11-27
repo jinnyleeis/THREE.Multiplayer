@@ -46658,17 +46658,14 @@ socket.on('userDisconnected', function (clientCount, _id, _ids) {
 
   if (_id != id) {
     console.log('A user disconnected with the id: ' + _id);
-    glScene.scene.remove(clients[_id].mesh);
+    // glScene.scene.remove(clients[_id].mesh);
     delete clients[_id];
   }
 });
 
 /* 서버로부터 데이터 받은 경우 */
 
-socket.on('connect', function () {
-
-  console.log("user client connect~");
-});
+socket.on('connect', function () {});
 
 //Update when one of the users moves in space
 socket.on('userPositions', function (_clientProps) {

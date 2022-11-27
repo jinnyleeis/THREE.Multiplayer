@@ -136,7 +136,7 @@ socket.on('userDisconnected', (clientCount, _id, _ids)=>{
 
   if(_id != id){
     console.log('A user disconnected with the id: ' + _id);
-    glScene.scene.remove(clients[_id].mesh);
+   // glScene.scene.remove(clients[_id].mesh);
     delete clients[_id];
   }
 });
@@ -146,7 +146,7 @@ socket.on('userDisconnected', (clientCount, _id, _ids)=>{
 
 socket.on('connect', ()=>{
 
-console.log("user client connect~")
+
 
 });
 
