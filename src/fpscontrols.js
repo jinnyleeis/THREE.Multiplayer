@@ -8,7 +8,7 @@ module.exports = (THREE) =>{
 	THREE.FirstPersonControls = function ( object, domElement ) {
 
 		this.object = object;
-		this.target = new THREE.Vector3( 0, 0, 0 );
+		this.target = new THREE.Vector3( 0, 3, 0 );
 
 		this.domElement = ( domElement !== undefined ) ? domElement : document;
 
@@ -93,8 +93,8 @@ module.exports = (THREE) =>{
 
 				switch ( event.button ) {
 
-					case 0: this.moveForward = true; break;
-					case 2: this.moveBackward = true; break;
+					case 0: this.moveForward = false; break;
+					case 2: this.moveBackward = false; break;
 
 				}
 
@@ -120,7 +120,7 @@ module.exports = (THREE) =>{
 
 			}
 
-			this.mouseDragOn = true;
+			this.mouseDragOn = false;
 
 		};
 
@@ -129,12 +129,12 @@ module.exports = (THREE) =>{
 			if ( this.domElement === document ) {
 
 				this.mouseX = event.pageX - this.viewHalfX;
-				this.mouseY = event.pageY - this.viewHalfY;
+				//this.mouseY = event.pageY - this.viewHalfY;
 
 			} else {
 
 				this.mouseX = event.pageX - this.domElement.offsetLeft - this.viewHalfX;
-				this.mouseY = event.pageY - this.domElement.offsetTop - this.viewHalfY;
+				//this.mouseY = event.pageY - this.domElement.offsetTop - this.viewHalfY;
 
 			}
 
