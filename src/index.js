@@ -46,7 +46,7 @@ let clients = new Object();
 
 glScene.on('userMoved', ()=>{
   
-  socket.emit('move', [glScene.camera.position.x, glScene.camera.position.y, glScene.camera.position.z]);
+  socket.emit('move', [glScene.camera.position.x, glScene.camera.position.y+5, glScene.camera.position.z]);
 
 
 }
@@ -72,7 +72,7 @@ socket.on('introduction', (_id, _clientNum, _ids)=>{
 
 
 
-  var w1=Math.random();
+  var w1=Math.random()*0.1;
 
   for(let i = 0; i < _ids.length; i++){
     if(_ids[i] != _id){
@@ -114,7 +114,7 @@ socket.on('newUserConnected', (clientCount, _id, _ids)=>{
   }
 
   
-  var w1=Math.random()*1.5;
+  var w1=Math.random()*0.1;
   if(_id != id && !alreadyHasUser){
     console.log('A new user connected with the id: ' + _id);
     clients[_id] = {
